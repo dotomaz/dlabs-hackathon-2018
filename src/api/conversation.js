@@ -25,21 +25,21 @@ const conversationData = [
         steps: [
             {
                 text: 'Sure, let\'s try Crazy eights, which is a core Design Sprint method. It\'s basically fast '+
-                'sketching that challenges people to create eight distinct ideas in eight minutes.'+ 
-                '<break time="1s"/>'+
-                'This is how you do it.'+
-                '<break time="1s"/>'+
-                'Take a piece of paper and fold it in eight sections. '+
-                '<break time="1s"/>'+
-                'Next set the timer for 8 minutes. If you ask me later, I can also do that for you.'+
-                '<break time="1s"/>'+
-                'The third step is for each team member to sketch one idea in each rectangle. When the time runs out, '+
-                ' put your pens down and present your ideas to others.'+  
-                '<break time="1s"/>'+
-                'Just as a general note, it\'s important to remember that ideas don\'t have to be great. '+
-                'This is an exercise to quiet your inner critic and help your creative juices flowing. '+
-                '<break time="1s"/>'+
-                'Enjoy the crazy eights. If you need me to repeat the rules, just shout my name!',
+                    'sketching that challenges people to create eight distinct ideas in eight minutes.'+ 
+                    '<break time="1s"/>'+
+                    'This is how you do it.'+
+                    '<break time="1s"/>'+
+                    'Take a piece of paper and fold it in eight sections. '+
+                    '<break time="1s"/>'+
+                    'Next set the timer for 8 minutes. If you ask me later, I can also do that for you.'+
+                    '<break time="1s"/>'+
+                    'The third step is for each team member to sketch one idea in each rectangle. When the time runs out, '+
+                    ' put your pens down and present your ideas to others.'+  
+                    '<break time="1s"/>'+
+                    'Just as a general note, it\'s important to remember that ideas don\'t have to be great. '+
+                    'This is an exercise to quiet your inner critic and help your creative juices flowing. '+
+                    '<break time="1s"/>'+
+                    'Enjoy the crazy eights. If you need me to repeat the rules, just shout my name!',
                 duration: 0
             },
 
@@ -57,7 +57,7 @@ class Conversation
     }
 
     say(text, conv, breakTime){
-
+        if(!conv) return;
         if( typeof breakTime === undefined) { breakTime = 0;}
         if(!text || text.length == 0){ return;}
 
@@ -74,6 +74,22 @@ class Conversation
         console.log('CLOSE: <speak>'+text+'</speak>');
         conv.close('<speak>'+text+'</speak>');
         //conv.close(text);
+    }
+
+    getCurrentText(){
+        let step = this.getCurrentStep();
+        if(step < this.exercise.steps.length ){
+            return this.exercise.steps[step].text;
+        }
+        return "";
+    }
+
+    getCurrentStep(){
+        return this.step > 0 ? this.step-1: 0;
+    }
+
+    getStepCount(){
+        return this.exercise.steps.length;
     }
 
     startNew(name, conv){

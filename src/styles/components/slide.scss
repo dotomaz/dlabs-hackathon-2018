@@ -1,0 +1,35 @@
+@keyframes slideToLeft {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes slideFromRight {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+
+
+.slide{
+    width: 100vw;
+    height: 100vh;
+    transform: translate3d(0,0,0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.prev{
+        transform: translate3d(-100%,0,0);
+        animation: slideToLeft 1s ease-in-out;
+    }
+
+    &.current{
+        animation: slideFromRight 1s ease-in-out;
+    }
+
+    &.next{
+        transform: translate3d(100%,0,0);
+    }
+}

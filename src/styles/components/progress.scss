@@ -1,0 +1,26 @@
+.progress{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    overflow: visible;
+    align-self: flex-start;
+
+    .el{
+        background-color: #fff;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 10px;
+
+        &.selected{
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

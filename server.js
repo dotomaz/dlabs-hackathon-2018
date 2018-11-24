@@ -101,14 +101,28 @@ http.listen(8000, function(){
   console.log('listening on *:8000');
 });
 
+let currentClient = null;
+
 io.on('connection', (client) => {
-    const connectTime = new Date();
+
+    currentClient = client;
+
+    conversation.startNew('relax');
+    
+        client.emit("exercise", {
+            text: conversation.getCurrentText(),
+            step: conversation.getCurrentStep(),
+            count: conversation.getStepCount()
+        });
+
+
+    let  cnt = 0;
     client.on('subscribeToTimer', (interval) => {
         console.log('client is subscribing to timer with interval ', interval);
         setInterval(() => {
-            const time = Math.round(((new Date()).getTime() - connectTime.getTime()) / 1000 );
+            cnt++;
             //console.log(time);
-            client.emit('timer', time);
+            client.emit('timer', cnt);
         }, interval);
     });
 });

@@ -1,10 +1,11 @@
 .main-screen{
     display: flex;
     color: white;
-    font-size: 100px;
+    font-size: 32px;
     font-weight: bold;
-    height: 100vh;
+    height: calc(100vh - 88px);
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
