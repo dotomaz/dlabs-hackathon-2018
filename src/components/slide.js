@@ -8,7 +8,10 @@ import '../styles/components/slide.scss';
 export default class Slide extends React.Component {
 
     formatText(text){
-        const arr = text.replace(/<break[^>]+>/gi, "##break##").split("##break##");
+        text = text.replace(/<break[^>]+>/gi,"##break##");
+        text = text.replace(/<\/prosody[^>]+>/gi,"");
+        text = text.replace(/<\/audio[^>]+>/gi,"");
+        const arr = text.split("##break##");
 
         return arr.map((el,i) => {
             return (

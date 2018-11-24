@@ -41,7 +41,7 @@ flow.intent('Start new excercise', conv => {
 
     switch(Type){
         case 'fun':
-            conversation.startNew('relax', conv);
+            conversation.startNew('fun', conv);
             break;
         case 'creative':
             conversation.startNew('creative', conv);
@@ -73,6 +73,28 @@ flow.intent('Control', conv => {
 
 });
 
+flow.intent('Winner', conv => {
+    const accountSid = 'AC4a3736819b81ffabfb626df0ed903035';
+    const authToken = 'b277ddc7a1436b432361b3e0c25a8eac';
+    const client = require('twilio')(accountSid, authToken);
+
+
+    client.messages
+      .create({
+         body: 'LOL',
+         from: '+1 540 302 5676',
+         to: '+38631752144'
+       })
+      .then(message => {
+          console.log(message.sid);
+          
+      })
+      .done();
+
+      conversation.startNew('winner', conv);
+
+    //conv.ask('This is Billy. I love you honey!!!!');
+});
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -80,7 +102,7 @@ app.get('/', function(req, res){
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.get('/test', function(req, res){
-    res.send('testing 123');
+    res.send('testing '+ (new Date()).getTime());
 });
 
 app.post('/api', flow);

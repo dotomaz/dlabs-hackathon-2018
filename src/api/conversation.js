@@ -1,20 +1,34 @@
 const conversationData = [
     {   name: "relax",
-        text: "This exercise will help us test the app.",
+        text: '',
         doneText: "Lets continue the meeting.",
-
         steps: [
             {
-                text: "This is step 1 of the exercise.",
-                duration: 60000
-            },
-            {
-                text: "This is step 2 of the exercise.",
-                duration: 60000
-            },
-            {
-                text: "This is step 3 of the exercise.",
-                duration: 60000
+                text:   '<prosody rate="medium">Sure, I\'d suggest some mindful breathing. You\'ll be as good as new in just a couple of minutes.'+
+                        '<break time="1s"/>Shall we start?</prosody>'+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">Find a comfortable position with a straight back.</prosody>  '+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">Gently rest your arms on your lap.</prosody>'+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">Breathe in deeply.</prosody> '+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">Hold for four seconds. One, two, three, four.</prosody> '+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">And exhale slowly. One, two, three, four, five, six, seven, eight</prosody>  '+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">Breathe in deeply.</prosody>  '+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">Hold for four seconds.One, two, three, four.</prosody> '+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">And exhale slowly. One, two, three, four, five, six, seven, eight</prosody>  '+
+                        '<break time="3s"/>'+
+                        '<prosody rate="medium">Now return to your natural breath.</prosody>'+
+                        '<break time="10s"/>'+
+                        '<prosody rate="medium">Slowly bring your attention back to the room. And when you\'re ready, open your eyes. Look up to the skies and see.</prosody> '+
+                        '<break time="3s"/>'+
+                        '<audio src="http://www.hibberts.co.uk/dorko5lr.wav"></audio>',
+                duration: 12000
             }
         ]
     },
@@ -25,7 +39,7 @@ const conversationData = [
         steps: [
             {
                 text: 'Sure, let\'s try Crazy eights, which is a core Design Sprint method. It\'s basically fast '+
-                    'sketching that challenges people to create eight distinct ideas in eight minutes.'+ 
+                    'sketching that challenges people to create eight distinct ideas in eight minutes.'+
                     '<break time="1s"/>'+
                     'This is how you do it.'+
                     '<break time="1s"/>'+
@@ -34,19 +48,52 @@ const conversationData = [
                     'Next set the timer for 8 minutes. If you ask me later, I can also do that for you.'+
                     '<break time="1s"/>'+
                     'The third step is for each team member to sketch one idea in each rectangle. When the time runs out, '+
-                    ' put your pens down and present your ideas to others.'+  
+                    ' put your pens down and present your ideas to others.'+
                     '<break time="1s"/>'+
                     'Just as a general note, it\'s important to remember that ideas don\'t have to be great. '+
                     'This is an exercise to quiet your inner critic and help your creative juices flowing. '+
                     '<break time="1s"/>'+
                     'Enjoy the crazy eights. If you need me to repeat the rules, just shout my name!',
-                duration: 0
+                duration: 12000
             },
 
         ]
     },
-    
-]
+    {   name: "fun",
+        text: "",
+        doneText: "Lets continue the meeting.",
+        steps: [
+            {
+                text: 'Ok, I have something interesting for you. Let\'s do an energiser called "I love you honey". This might seem silly at first, but humor me. It will help you relax.'+
+                    '<break time="1s"/>Ready to start?!'+
+                    '<break time="3s"/>'+
+                    'Now listen carefully. One person should now go in the middle of the circle, walk up to another person and say: <break time="0.5s"/>  “I love you honey, won’t you give me a smile?”'+
+                    '<break time="1s"/>'+
+                    'The other person needs to respond with, <break time="0.5s"/>“I love you too honey, but I just can’t smile,'+
+                    '<break time="0.5s"/> ... without smiling, of course.'+
+                    '<break time="1s"/>'+
+                    '<break time="0.5s"/>If this person cracks a smile, they need to switch places with the one in the middle. '+
+                    '<break time="2s"/>'+
+                    'Ready to start?!?',
+                duration: 30000
+            },
+            {
+                text: 'Enjoy. If you need me to repeat the rules, just shout my name!',
+                duration: 120000
+            },
+        ]
+    },
+    {   name: "winner",
+        text: "",
+        doneText: "Thank you everybody!",
+        steps: [
+            {
+                text: 'You know who... If you still don\'t, check your mobile phone.',
+                duration: 120000
+            },
+        ]
+    },
+];
 
 class Conversation
 {
