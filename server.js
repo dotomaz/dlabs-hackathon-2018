@@ -95,7 +95,7 @@ io.on('connection', (client) => {
 
     currentIOClient = client;
     conversation.setClient(client);
-
+    /*
     setTimeout( () => {
     //conversation.startNew('creative');
     conversation.startNew('relax');
@@ -131,7 +131,7 @@ io.on('connection', (client) => {
     
         client.emit("idle", {});
     }, 20000);
-
+    */
 
     let  cnt = 0;
     client.on('subscribeToTimer', (interval) => {
