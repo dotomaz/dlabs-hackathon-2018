@@ -7,12 +7,14 @@ import '../styles/screen/main.scss';
 
 import Slide from '../components/slide';
 import Progress from '../components/progress';
+import Idle from '../components/idle';
 
 
 export default class MainScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      type: "idle",
       text: "",
       step: 0,
       count: 1
@@ -33,7 +35,18 @@ export default class MainScreen extends React.Component {
       console.log(text, step, count);
 
       this.setState({ 
-        text, step, count
+        type: "slide",
+        text, 
+        step, 
+        count
+      });
+    });
+
+    socket.subscribeToIdle((err, text, step, count) => { 
+      console.log(text, step, count);
+
+      this.setState({ 
+        type: "idle"
       });
     });
 
@@ -42,10 +55,20 @@ export default class MainScreen extends React.Component {
   render() {
     return (
       <div className="main-screen">
-        { this.state.count > 1 && (
-          <Progress position={this.state.step} count={this.state.count}/>
-        )}
-        <Slide position={this.state.step} text={this.state.text} ></Slide>
+        
+      {this.state.type == "slide" && (
+        <div>
+          { this.state.count > 1 && (
+            <Progress position={this.state.step} count={this.state.count}/>
+          )}
+          <Slide position={this.state.step} text={this.state.text} ></Slide>
+        </div>
+      )}
+
+      {this.state.type != "slide" && (
+        <Idle></Idle>
+      )}
+        
       </div>
     );
   }

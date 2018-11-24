@@ -6,13 +6,17 @@ import '../styles/components/slide.scss';
 
 
 export default class Slide extends React.Component {
-    constructor(props){
-        super(props);
 
-        this.state = {
+    formatText(text){
+        const arr = text.replace(/<break[^>]+>/gi, "##break##").split("##break##");
 
-        }
+        return arr.map((el,i) => {
+            return (
+                <p key={i}>{el}</p>
+            );
+        });
     }
+
   render() {
       let css = "slide slide-"+ this.props.position +" "+this.props.css;
     return (
@@ -22,7 +26,7 @@ export default class Slide extends React.Component {
             <img src={this.props.image} />
         )}
     
-        <div className="text">{this.props.text}</div>
+        <div className="text">{this.formatText(this.props.text)}</div>
     </div>
 
     );

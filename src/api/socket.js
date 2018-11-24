@@ -11,5 +11,10 @@ function subscribeToExercise(cb) {
     
 }
 
-const io = { subscribeToTimer, subscribeToExercise };
+function subscribeToIdle(cb) {
+    socket.on('idle', data => cb(null, data.text, data.step, data.count));
+    
+}
+
+const io = { subscribeToTimer, subscribeToExercise, subscribeToIdle };
 export default io;

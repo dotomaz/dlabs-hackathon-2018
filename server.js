@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const http = require('http').Server(app);
 const path = require('path');
 
+let currentIOClient = null;
 
 const {
     dialogflow,
@@ -55,7 +56,6 @@ flow.intent('Start new excercise', conv => {
             conversation.sayGoodbye("I don't know what exercise to start.",conv);
     }
 
-    //conv.ask('This is Billy. I love you honey!!!!');
 });
 
 flow.intent('Control', conv => {
@@ -83,37 +83,54 @@ app.get('/test', function(req, res){
     res.send('testing 123');
 });
 
-/*app.post('/api', function(req, res){
-    console.log(req.body);      // your JSON
-    let text = "I don't undestand.";
-    
-    if(req.body.queryResult && req.body.queryResult.queryText){
-        text = req.body.queryResult.queryText;
-    }
-
-    res.contentType("text/plain");
-    res.send(text);
-});*/
-
 app.post('/api', flow);
 
 http.listen(8000, function(){
   console.log('listening on *:8000');
 });
 
-let currentClient = null;
+
 
 io.on('connection', (client) => {
 
-    currentClient = client;
+    currentIOClient = client;
+    conversation.setClient(client);
 
+    setTimeout( () => {
+    //conversation.startNew('creative');
     conversation.startNew('relax');
+
+        client.emit("exercise", {
+            text: conversation.getCurrentText(),
+            step: conversation.getCurrentStep(),
+            count: conversation.getStepCount()
+        });
+    }, 5000);
+
+    setTimeout( () => {
+        conversation.nextStep();
     
         client.emit("exercise", {
             text: conversation.getCurrentText(),
             step: conversation.getCurrentStep(),
             count: conversation.getStepCount()
         });
+    }, 10000);
+
+    setTimeout( () => {
+        conversation.nextStep();
+    
+        client.emit("exercise", {
+            text: conversation.getCurrentText(),
+            step: conversation.getCurrentStep(),
+            count: conversation.getStepCount()
+        });
+    }, 15000);
+
+    setTimeout( () => {
+    
+        client.emit("idle", {});
+    }, 20000);
 
 
     let  cnt = 0;

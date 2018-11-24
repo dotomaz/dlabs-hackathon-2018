@@ -54,6 +54,33 @@ class Conversation
         this.exercise = null;
         this.step = 0;
         this.timer = null;
+        this.socletIoClient = null;
+    }
+
+    setClient(client){
+        this.socletIoClient = client;
+    }
+
+    showSlide(){
+        if( this.socletIoClient === null){
+            return;
+        }
+
+        this.socletIoClient.emit("exercise", {
+            text: this.getCurrentText(),
+            step: this.getCurrentStep(),
+            count: this.getStepCount()
+        });
+
+    }
+
+    showIdle(){
+        if( this.socletIoClient === null){
+            return;
+        }
+
+        this.socletIoClient.emit("idle", {});
+
     }
 
     say(text, conv, breakTime){
@@ -67,13 +94,18 @@ class Conversation
 
         console.log('SAY: '+text+'');
         conv.ask('<speak>'+text+'</speak>');
-        //conv.ask(text);
     }
     
     sayGoodbye(text, conv){
+        this.showIdle();
+
+        if(!conv) return;
+
         console.log('CLOSE: <speak>'+text+'</speak>');
         conv.close('<speak>'+text+'</speak>');
         //conv.close(text);
+
+        
     }
 
     getCurrentText(){
@@ -130,7 +162,7 @@ class Conversation
             const es = this.exercise.steps[this.step];
             this.say(es.text, conv, es.duration);
             this.step++;
-            
+            this.showSlide();
         }else{
             this.finish(conv);
         }
