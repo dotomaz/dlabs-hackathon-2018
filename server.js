@@ -74,8 +74,8 @@ flow.intent('Control', conv => {
 });
 
 flow.intent('Winner', conv => {
-    const accountSid = 'AC4a3736819b81ffabfb626df0ed903035';
-    const authToken = 'b277ddc7a1436b432361b3e0c25a8eac';
+    const accountSid = '*****';
+    const authToken = '*****';
     const client = require('twilio')(accountSid, authToken);
 
 
@@ -93,7 +93,6 @@ flow.intent('Winner', conv => {
 
       conversation.startNew('winner', conv);
 
-    //conv.ask('This is Billy. I love you honey!!!!');
 });
 
 app.use(express.static(path.join(__dirname, 'build')));
